@@ -1,6 +1,6 @@
 <?php
 
-include "./../layouts.php";
+// include "./../layouts.php";
 
 $dbuser="root";
 $dbpassword="";
