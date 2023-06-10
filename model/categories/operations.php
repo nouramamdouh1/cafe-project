@@ -65,6 +65,32 @@ function insert($name){
 
 // update
 
+function update($id,$name){
+    global $db;
+    try {
+        $update_query="update `cafe`.`categories` set `name`=:catname where `id`=:catid;";
+        $update_stmt= $db->prepare($update_query);
+        $update_stmt->bindParam(":catname",$name);
+        $update_stmt->bindParam(":catid",$id);
+        $res=$update_stmt->execute();
+
+        if ($res) {
+           $no_of_affected_rows = $update_stmt->rowCount();
+           return $no_of_affected_rows;
+           
+        }
+        return false;
+        
+    } catch (Exception $e) {
+       echo $e->getmessage();
+       return false;
+    }
+    
+    
+}
+
+
+
 
 
 
