@@ -98,6 +98,30 @@ function update($id,$name){
 
 // delete
 
+function delete($id){
+    global $db;
+    try {
+        $delete_query="delete from `cafe`.`categories` where `id`=:catid;";
+        $delete_stmt= $db->prepare($delete_query);
+        $delete_stmt->bindParam(":catid" , $id);
+        $res=$delete_stmt->execute();
+
+        if ($res) {
+           $no_of_affected_rows = $delete_stmt->rowCount();
+           return $no_of_affected_rows;
+           
+        }
+        return false;
+        
+    } catch (Exception $e) {
+       echo $e->getmessage();
+       return false;
+    }
+    
+    
+}
+
+
 
 
 
