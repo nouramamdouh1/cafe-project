@@ -35,6 +35,31 @@ function select(){
 // insert
 
 
+function insert($name){
+    global $db;
+    try {
+        $inst_query="insert into `cafe`.`categories` (`name`) values (:catname);";
+        $inst_stmt= $db->prepare($inst_query);
+        $inst_stmt->bindParam(":catname",$name);
+        $res=$inst_stmt->execute();
+
+        if ($res) {
+           $no_of_affected_rows = $inst_stmt->rowCount();
+           $id = $db->lastInsertId();
+           return $id;
+        }
+        return false;
+        
+    } catch (Exception $e) {
+       echo $e->getmessage();
+       return false;
+    }
+    
+    
+}
+
+
+
 
 
 
