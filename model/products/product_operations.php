@@ -28,6 +28,39 @@ function select(){
 }
 
 
+// insert
+
+
+function insert($name,$image,$price,$quantity,$category_id){
+    global $db;
+    try {
+        $inst_query="insert into `cafe`.`products` (`name`,`image`,`price`,`quantity`,`category_id`)
+         values (:prodname,:prodimage,:prodprice,:prodquantity,:prodcategory_id);";
+        $inst_stmt= $db->prepare($inst_query);
+        $inst_stmt->bindParam(":prodname",$name);
+        $inst_stmt->bindParam(":prodimage",$image);
+        $inst_stmt->bindParam(":prodprice",$price);
+        $inst_stmt->bindParam(":prodquantity",$quantity);
+        $inst_stmt->bindParam(":prodcategory_id",$category_id);
+
+        $res=$inst_stmt->execute();
+
+        if ($res) {
+           $no_of_affected_rows = $inst_stmt->rowCount();
+           $id = $db->lastInsertId();
+           return $id;
+        }
+        return false;
+        
+    } catch (Exception $e) {
+       echo $e->getmessage();
+       return false;
+    }
+    
+    
+}
+
+
 
 
 
