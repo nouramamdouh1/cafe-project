@@ -15,7 +15,7 @@ try {
     $db=new pdo( $dsn,$dbuser,$dbpassword);
 
     if ($db) {
-         echo"connected successfully";
+        //  echo"connected successfully";
         return $db;
     }else{
         echo"error in connection";
