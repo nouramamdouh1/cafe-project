@@ -9,6 +9,9 @@ $name = $_POST['name'];
 
 $added=insert($name);
 
+$table_url='./../view/categoriestable.php';
+header("location:$table_url");
+
 
 
 
