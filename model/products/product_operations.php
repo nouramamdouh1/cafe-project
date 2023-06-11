@@ -62,6 +62,43 @@ function insert($name,$image,$price,$quantity,$category_id){
 
 
 
+// update
+
+function update($id,$name,$image,$price,$quantity,$category_id){
+    global $db;
+    try {
+        $update_query="update `cafe`.`products` set `name`=:prodname ,
+        `image`=:prodimage,
+        `price` =:prodprice,
+        `quantity` =:prodquantity,
+        `category_id` =:prodcategory_id
+         where `id`=:prodid;";
+        $update_stmt= $db->prepare($update_query);
+        $update_stmt->bindParam(":prodname",$name);
+        $update_stmt->bindParam(":prodimage",$image);
+        $update_stmt->bindParam(":prodprice",$price);
+        $update_stmt->bindParam(":prodquantity",$quantity);
+        $update_stmt->bindParam(":prodcategory_id",$category_id);
+        $update_stmt->bindParam(":prodid",$id);
+        $res=$update_stmt->execute();
+
+        if ($res) {
+           $no_of_affected_rows = $update_stmt->rowCount();
+           return $no_of_affected_rows;
+           
+        }
+        return false;
+        
+    } catch (Exception $e) {
+       echo $e->getmessage();
+       return false;
+    }
+    
+    
+}
+
+
+
 
 
 
