@@ -13,11 +13,9 @@ function select(){
     try {
         $select_query="select * from `cafe`.`products`;";
         $select_stmt= $db->prepare($select_query);
-        $res=$select_stmt->execute();
-        $row_count=$select_stmt->rowCount();
-        $rows=$select_stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $rows;
-
+        $select_stmt->execute();
+        $products = $select_stmt->fetchAll();
+        return $products;
 
 
     } catch (Exception $e) {
@@ -26,6 +24,7 @@ function select(){
     
     
 }
+
 
 
 // insert

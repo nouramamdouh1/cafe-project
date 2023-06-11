@@ -1,21 +1,17 @@
 <?php
-include"./../layouts.php";
-include "./../model/products/dbconnection.php";
-?>
+session_start();
 
+include "./../layouts.php";
+// include "./../model/products/dbconnection.php";
+include "./../model/products/product_operations.php";
 
+$product=select_product_by_id($_GET['id']);
+$query2 = 'SELECT * FROM categories'  ;          
+    $sql2 = $db->prepare($query2);
+    $result2  = $sql2->execute();
+    
+    $categories = $sql2->fetchAll();
 
-<?php
-
-$db= connect_to_database($dbuser,$dbpassword,$dbhost,$dbname);
-if (isset($_GET)) {
-
-    $query = 'SELECT * FROM categories';
-    $sql = $db->prepare($query);
-    $result  = $sql->execute();
-
-    $categories = $sql->fetchAll();
-}
 
 ?>
 
@@ -26,15 +22,12 @@ if (isset($_GET)) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add product</title>
-</head>
+   
 <style>
     body {
         margin: 0;
         padding: 0;
     }
-    
 </style>
 
 <body>
@@ -51,10 +44,10 @@ if (isset($_GET)) {
                             <a class="nav-link border-end" href="all_products.php">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link border-end" href="#">Users</a>
+                            <a class="nav-link border-end" href="all_users.php">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link border-end" href="#">Manual Order</a>
+                            <a class="nav-link border-end" href="homwpage.php">Manual Order</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link border-end" href="#">Checks</a>
@@ -62,7 +55,9 @@ if (isset($_GET)) {
 
 
                     </ul>
-                    
+                    <p class="mx-1 ">
+                        <a class="btn btn-secondary mx-1 " href="logout.php">logout</a>
+                    </p>
                 </div>
             </div>
         </nav>
@@ -71,34 +66,20 @@ if (isset($_GET)) {
     <div class="container">
         <div class="row my-2">
             <div class="col-12">
-                <h2>Add Product</h2>
+                <h2>Edit Product</h2>
             </div>
-            <?php if (isset($_SESSION['errors']['product'])) {
-                foreach ($_SESSION['errors']['product'] as $err_product) {
-                    # code...
-                }
-            ?>
-                <div class="alert alert-danger w-50 m-auto text center">
-                    <span>
-                        <?php echo $err_product;
-                        unset($_SESSION['errors']['product']);
-                        ?>
-
-                    </span>
-                </div>
-
-
-            <?php }  ?>
 
         </div>
-        <form action="./../controller/saveproduct.php" method="post" enctype="multipart/form-data">
+        <form action="./../controller/updateproduct.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-12">
                     <div class=" p-3  mx-auto my-3">
+                        <input type="hidden" name="id" value="<?php echo $product['id'] ?>">
+
                         <div class="mb-3 row  ">
                             <label class="col-sm-3 col-form-label">Product Name</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="Enter new Product" name="name">
+                                <input type="text" class="form-control" placeholder="Enter new Product"  name="name" value="<?php echo $product['name'] ?>">
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -106,7 +87,7 @@ if (isset($_GET)) {
                             <div class="col-sm-8">
                                 <div class="row">
                                     <div class="col-6">
-                                        <input type="number" name="price" placeholder="1" class="form-control ">
+                                        <input type="number" name="price" placeholder="enter price" value="<?php echo $product['price'] ?>" class="form-control ">
 
                                     </div>
                                     <div class="col-2">
@@ -115,20 +96,6 @@ if (isset($_GET)) {
                                 </div>
 
                             </div>
-                            <br><br>
-                            <div class="mb-3 row ">
-                            <label for="inputPassword" class="col-sm-3 col-form-label">quantity</label>
-                            <div class="col-sm-8">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <input type="number" name="quantity" placeholder="1" class="form-control ">
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
                         </div>
                         <div class="mb-3 row">
                             <label for="" class="col-sm-3 col-form-label">Category</label>
@@ -143,7 +110,7 @@ if (isset($_GET)) {
 
                                                     <option value="<?php echo $cat['id']  ?>"><?php echo $cat['name']  ?></option>
 
-                                            <?php    # code...
+                                            <?php 
                                                 }
                                             } ?>
 
@@ -151,9 +118,7 @@ if (isset($_GET)) {
 
                                         </select>
                                     </div>
-                                    <div class="col-2">
-                                        <a href="add_category.php">Add Category</a>
-                                    </div>
+                                    
                                 </div>
                                 <!-- category name -->
                                 <?php
@@ -165,7 +130,7 @@ if (isset($_GET)) {
                                         </span>
                                     </div>
 
-                                <?php unset($_SESSION['inserted_category']);
+                                <?php session_unset();
                                 } ?>
                             </div>
 
@@ -175,7 +140,10 @@ if (isset($_GET)) {
                             <div class="row">
 
                                 <label class="col-sm-3 col-form-label">Product Picture</label>
+                                <div class="row w-50 m-auto">
+                                <img src="<?php echo $product['image'] ?>" style="max-height:250px" alt="image">
 
+                                </div>
                                 <div class="col-4">
                                     <div class="input-group mb-3">
                                         <input type="file" name="image" class="form-control" id="inputGroupFile02">
@@ -197,7 +165,6 @@ if (isset($_GET)) {
         </form>
 
     </div>
-    
 </body>
 
 </html>
