@@ -132,8 +132,8 @@ function select_category_by_id($id){
         $select_stmt->bindParam(":catid" , $id);
         $res=$select_stmt->execute();
         $row_count=$select_stmt->rowCount();
-        $rows=$select_stmt->fetch(PDO::FETCH_ASSOC);
-        return $rows;
+        $row=$select_stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
 
 
 

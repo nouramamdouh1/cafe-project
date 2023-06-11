@@ -25,7 +25,7 @@ $rows=select();
             foreach ($row as $field) {
                 echo "<td>{$field}</td>";
             }
-            echo "<td><a class='btn btn-primary'>Edit</a></td>";
+            echo "<td><a href='./../view/editcategory.php?id={$row["id"]}' class='btn btn-primary'>Edit</a></td>";
             echo "<td><a class='btn btn-secondary'>Show</a></td>";
             echo "<td><a class='btn btn-danger'>Delete</a></td>";
             echo"</tr>";
