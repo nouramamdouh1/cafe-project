@@ -122,6 +122,28 @@ function delete($id){
 }
 
 
+//select one
+
+function select_category_by_id(){
+    global $db;
+    try {
+        $select_query="select * from `cafe`.`categories` where `id`=:catid;";
+        $select_stmt= $db->prepare($select_query);
+        $select_stmt->bindParam(":catid" , $id);
+        $res=$select_stmt->execute();
+        $row_count=$select_stmt->rowCount();
+        $rows=$select_stmt->fetch(PDO::FETCH_ASSOC);
+        return $rows;
+
+
+
+    } catch (Exception $e) {
+       $e->getmessage();
+    }
+    
+    
+}
+
 
 
 
