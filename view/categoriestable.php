@@ -6,6 +6,8 @@ $rows=select();
 
 ?>
 <div class="container">
+  <br>
+  <a href="./../view/createcategory.php" class="btn btn-success py-2 my-4">Add category</a>
 
 <table class="table">
   <thead>
@@ -13,7 +15,6 @@ $rows=select();
       <th scope="col">Id</th>
       <th scope="col">Name</th>
       <th scope="col">Edit</th>
-      <th scope="col">Show</th>
       <th scope="col">delete</th>
     </tr>
   </thead>
@@ -26,7 +27,6 @@ $rows=select();
                 echo "<td>{$field}</td>";
             }
             echo "<td><a href='./../view/editcategory.php?id={$row["id"]}' class='btn btn-primary'>Edit</a></td>";
-            echo "<td><a class='btn btn-secondary'>Show</a></td>";
             echo "<td><a href='./../controller/deletecategory.php?id={$row["id"]}' class='btn btn-danger'>Delete</a></td>";
             echo"</tr>";
         }
