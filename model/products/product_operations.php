@@ -126,6 +126,28 @@ function delete($id){
 
 
 
+//select one
+
+function select_product_by_id($id){
+    global $db;
+    try {
+        $select_query="select * from `cafe`.`products` where `id`=:prodid;";
+        $select_stmt= $db->prepare($select_query);
+        $select_stmt->bindParam(":prodid" , $id);
+        $res=$select_stmt->execute();
+        $row_count=$select_stmt->rowCount();
+        $row=$select_stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+
+
+
+    } catch (Exception $e) {
+       $e->getmessage();
+    }
+    
+    
+}
+
 
 
 ?>
