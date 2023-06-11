@@ -72,9 +72,9 @@ if (isset($_SESSION['products'])) {
     </div>
 
 
-    
 
-<table class="table">
+
+<table class="table table-striped">
                 <thead>
                     <tr>
                         <th>id</th>
