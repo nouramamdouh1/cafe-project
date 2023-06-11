@@ -72,6 +72,7 @@ if (isset($_SESSION['products'])) {
     </div>
 
 
+    
 
 <table class="table">
                 <thead>
