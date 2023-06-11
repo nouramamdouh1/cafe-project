@@ -124,7 +124,7 @@ function delete($id){
 
 //select one
 
-function select_category_by_id(){
+function select_category_by_id($id){
     global $db;
     try {
         $select_query="select * from `cafe`.`categories` where `id`=:catid;";
