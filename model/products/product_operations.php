@@ -98,6 +98,32 @@ function update($id,$name,$image,$price,$quantity,$category_id){
 }
 
 
+// delete
+
+function delete($id){
+    global $db;
+    try {
+        $delete_query="delete from `cafe`.`products` where `id`=:prodid;";
+        $delete_stmt= $db->prepare($delete_query);
+        $delete_stmt->bindParam(":prodid" , $id);
+        $res=$delete_stmt->execute();
+
+        if ($res) {
+           $no_of_affected_rows = $delete_stmt->rowCount();
+           return $no_of_affected_rows;
+           
+        }
+        return false;
+        
+    } catch (Exception $e) {
+       echo $e->getmessage();
+       return false;
+    }
+    
+    
+}
+
+
 
 
 
