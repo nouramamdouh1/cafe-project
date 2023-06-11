@@ -129,8 +129,7 @@ if (isset($_SESSION['products'])) {
 
                                 <td>
                                     <a class="btn btn-secondary" href="edit_product.php?id=<?php echo $product['id'] ?>">Update</a>
-                                    <a class="btn btn-danger" href="./delete/product.php?id=<?php echo $product['id'] ?>">delete</a>
-
+                                    <a class="btn btn-danger" href="./../controller/deleteproduct.php?id=<?php echo $product['id'] ?>">delete</a>
                                 </td>
 
                             </tr>
