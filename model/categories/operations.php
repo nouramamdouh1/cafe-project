@@ -1,7 +1,7 @@
 <?php
 
-include "./../../layouts.php";
-include "./../dbconnection.php";
+// include "./../../layouts.php";
+include "dbconnection.php";
 
 
 
