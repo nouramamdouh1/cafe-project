@@ -120,3 +120,4 @@ if (isset($_SESSION['products'])) {
                     }  ?>
                 </tbody>
             </table>
+            
