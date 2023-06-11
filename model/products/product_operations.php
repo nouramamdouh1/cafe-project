@@ -14,8 +14,9 @@ function select(){
         $select_query="select * from `cafe`.`products`;";
         $select_stmt= $db->prepare($select_query);
         $select_stmt->execute();
-        $products = $select_stmt->fetchAll();
-        return $products;
+        $row_count=$select_stmt->rowCount();
+        $rows=$select_stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
 
 
     } catch (Exception $e) {
