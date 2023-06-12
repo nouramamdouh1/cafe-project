@@ -1,13 +1,13 @@
 <?php 
     include_once 'header.php';
-    include_once '../core/session.php';
+    include_once '../../core/session.php';
 ?>
 
     <h1 class="header">Signup</h1>
 
     <?php flash('register') ?>
 
-    <form method="post" action="../controllers/Users.php">
+    <form method="post" action="../../controller/Users.php">
         <input type="hidden" name="type" value="register">
         <input type="text" name="usersName" 
         placeholder="Full name...">
@@ -22,6 +22,3 @@
         <button type="submit" name="submit">Sign Up</button>
     </form>
     
-<?php 
-    include_once 'footer.php'
-?>

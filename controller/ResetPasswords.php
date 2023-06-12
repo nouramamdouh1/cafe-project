@@ -2,9 +2,9 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require_once '../models/ResetPassword.php';
+require_once '../model/ResetPassword.php';
 require_once '../core/session.php';
-require_once '../models/User.php';
+require_once '../model/User.php';
 //Require PHP Mailer
 require_once '../../PHPMailer/src/PHPMailer.php';
 require_once '../../PHPMailer/src/Exception.php';
@@ -36,12 +36,12 @@ class ResetPasswords{
 
         if(empty($usersEmail)){
             flash("reset", "Please input email");
-            redirect("../views/reset-password.php");
+            redirect("../view/views/reset-password.php");
         }
 
         if(!filter_var($usersEmail, FILTER_VALIDATE_EMAIL)){
             flash("reset", "Invalid email");
-            redirect("../views/reset-password.php");
+            redirect("../view/views/reset-password.php");
         }
         //Will be used to query the user from the database
         $selector = bin2hex(random_bytes(8));
@@ -73,7 +73,7 @@ class ResetPasswords{
         $this->mail->send();
 
         flash("reset", "Check your email", 'form-message form-message-green');
-        redirect("../views/reset-password.php");
+        redirect("../view/views/reset-password.php");
     }
 
     public function resetPassword(){
@@ -85,7 +85,7 @@ class ResetPasswords{
             'pwd' => trim($_POST['pwd']),
             'pwd-repeat' => trim($_POST['pwd-repeat'])
         ];
-        $url = '../views/create-new-password.php?selector='.$data['selector'].'&validator='.$data['validator'];
+        $url = '../view/views/create-new-password.php?selector='.$data['selector'].'&validator='.$data['validator'];
 
         if(empty($_POST['pwd'] || $_POST['pwd-repeat'])){
             flash("newReset", "Please fill out all fields");
@@ -145,8 +145,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $init->resetPassword();
             break;
         default:
-        header("location: ../views/index.php");
+        header("location: ../view/views/index.php");
     }
 }else{
-    header("location: ../views/index.php");
+    header("location: ../view/views/index.php");
 }

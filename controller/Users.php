@@ -30,31 +30,31 @@
             if(empty($data['usersName']) || empty($data['usersEmail']) || empty($data['usersUid']) || 
             empty($data['usersPwd']) || empty($data['pwdRepeat'])){
                 flash("register", "Please fill out all inputs");
-                redirect("../views/signup.php");
+                redirect("../view/views/signup.php");
             }
 
             if(!preg_match("/^[a-zA-Z0-9]*$/", $data['usersUid'])){
                 flash("register", "Invalid username");
-                redirect("../views/signup.php");
+                redirect("../view/views/signup.php");
             }
 
             if(!filter_var($data['usersEmail'], FILTER_VALIDATE_EMAIL)){
                 flash("register", "Invalid email");
-                redirect("../views/signup.php");
+                redirect("../view/views/signup.php");
             }
 
             if(strlen($data['usersPwd']) < 6){
                 flash("register", "Invalid password");
-                redirect("../views/signup.php");
+                redirect("../view/views/signup.php");
             } else if($data['usersPwd'] !== $data['pwdRepeat']){
                 flash("register", "Passwords don't match");
-                redirect("../views/signup.php");
+                redirect("../view/views/signup.php");
             }
 
             //User with the same email or password already exists
             if($this->userModel->findUserByEmailOrUsername($data['usersEmail'], $data['usersName'])){
                 flash("register", "Username or email already taken");
-                redirect("../views/signup.php");
+                redirect("../view/views/signup.php");
             }
 
             //Passed all validation checks.
@@ -63,7 +63,7 @@
 
             //Register User
             if($this->userModel->register($data)){
-                redirect("../views/login.php");
+                redirect("../view/views/login.php");
             }else{
                 die("Something went wrong");
             }
@@ -81,7 +81,7 @@
 
         if(empty($data['name/email']) || empty($data['usersPwd'])){
             flash("login", "Please fill out all inputs");
-            header("location: ../views/login.php");
+            header("location: ../view/views/login.php");
             exit();
         }
 
@@ -94,11 +94,11 @@
                 $this->createUserSession($loggedInUser);
             }else{
                 flash("login", "Password Incorrect");
-                redirect("../views/login.php");
+                redirect("../view/views/login.php");
             }
         }else{
             flash("login", "No user found");
-            redirect("../views/login.php");
+            redirect("../view/views/login.php");
         }
     }
 
@@ -114,13 +114,13 @@
         // Check if the user is an admin
         if ($user->isAdmin) {
             $_SESSION['isAdmin'] = true;
-            redirect("../views/admin.php");
+            redirect("../view/views/admin.php");
         } else {
             $_SESSION['isAdmin'] = false;
             
         }
     
-        redirect("../views/index.php");
+        redirect("../view/views/index.php");
     }
 
     public function logout(){
@@ -128,7 +128,7 @@
         unset($_SESSION['usersName']);
         unset($_SESSION['usersEmail']);
         session_destroy();
-        redirect("../views/index.php");
+        redirect("../view/views/index.php");
     }
 }
 
@@ -144,7 +144,7 @@
                 $init->login();
                 break;
             default:
-            redirect("../views/index.php");
+            redirect("../view/views/index.php");
         }
         
     }else{
@@ -153,7 +153,7 @@
                 $init->logout();
                 break;
             default:
-            redirect("../views/index.php");
+            redirect("../view/views/index.php");
         }
     }
 

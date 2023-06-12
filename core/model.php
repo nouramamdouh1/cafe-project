@@ -6,11 +6,11 @@
     * Bind values
     * Return rows and results
 */
-class User {
+class Database {
     private $host = 'localhost';
     private $user = 'root';
     private $pass = '';
-    private $dbname = 'cafe';
+    private $dbname = 'cafe2';
 
     //Will be the PDO object
     private $dbh;
