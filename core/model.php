@@ -6,7 +6,7 @@
     * Bind values
     * Return rows and results
 */
-class Database {
+class User {
     private $host = 'localhost';
     private $user = 'root';
     private $pass = '';
