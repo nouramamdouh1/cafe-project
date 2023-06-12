@@ -8,7 +8,7 @@
         if(ctype_xdigit($selector) && ctype_xdigit($validator)) { ?>
 <?php 
     include_once 'header.php';
-    include_once './helpers/session_helper.php';
+    include_once '../core/session.php';
 ?>
     <h1 class="header">Enter New Password</h1>
 
