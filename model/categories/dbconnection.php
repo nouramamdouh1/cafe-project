@@ -4,7 +4,7 @@
 
 $dbuser="root";
 $dbpassword="";
-$dbname="cafe";
+$dbname="cafe2";
 $dbhost="localhost";
 
 function connect_to_database($dbuser,$dbpassword,$dbhost,$dbname){

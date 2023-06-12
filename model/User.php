@@ -29,13 +29,13 @@ class User {
     //Register User
     public function register($data){
         $this->db->query('INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) 
-        VALUES (:name, :email, :Uid, :password)');
+        VALUES (:name, :email, :uid, :password)');
         //Bind values
         $this->db->bind(':name', $data['usersName']);
         $this->db->bind(':email', $data['usersEmail']);
-        $this->db->bind(':Uid', $data['usersUid']);
+        $this->db->bind(':uid', $data['usersUid']); // Corrected column name
         $this->db->bind(':password', $data['usersPwd']);
-
+    
         //Execute
         if($this->db->execute()){
             return true;
@@ -43,6 +43,7 @@ class User {
             return false;
         }
     }
+    
 
     //Login user
     public function login($nameOrEmail, $password){
